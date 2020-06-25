@@ -26,6 +26,7 @@ from pyrogram import Client, Filters
 
 from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
+from helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
@@ -90,7 +91,14 @@ async def rename_doc(bot, update):
             logger.info(the_real_download_location)
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
             if not os.path.exists(thumb_image_path):
-                thumb_image_path = None
+                thumb_image_path = await take_screen_shot(
+                    the_real_download_location,
+                    os.path.dirname(the_real_download_location),
+                    random.randint(
+                        0,
+                        duration - 1
+                    )
+                )
             else:
                 width = 0
                 height = 0
