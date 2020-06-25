@@ -103,7 +103,10 @@ async def rename_doc(bot, update):
             else:
                 width = 0
                 height = 0
+                duration = 0
                 metadata = extractMetadata(createParser(thumb_image_path))
+                if metadata.has("duration"):
+                duration = metadata.get('duration').seconds
                 if metadata.has("width"):
                     width = metadata.get("width")
                 if metadata.has("height"):
