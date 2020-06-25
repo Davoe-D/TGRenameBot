@@ -9,6 +9,7 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger(__name__)
 
 import os
+import random
 import time
 
 # the secret configuration specific things
