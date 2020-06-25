@@ -129,6 +129,7 @@ async def rename_doc(bot, update):
                 video=new_file_name,
                 width=width,
                 height=height,
+                duration=duration,
                 supports_streaming=True,
                 thumb=thumb_image_path,
                 caption=file_name,
