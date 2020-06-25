@@ -90,6 +90,12 @@ async def rename_doc(bot, update):
                 message_id=a.message_id
                 )
             logger.info(the_real_download_location)
+            width = 0
+            height = 0
+            duration = 0
+            metadata = extractMetadata(createParser(the_real_download_location))
+            if metadata.has("duration"):
+                duration = metadata.get('duration').seconds
             thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
             if not os.path.exists(thumb_image_path):
                 thumb_image_path = await take_screen_shot(
@@ -100,17 +106,13 @@ async def rename_doc(bot, update):
                         duration - 1
                     )
                 )
-            else:
-                width = 0
-                height = 0
-                duration = 0
-                metadata = extractMetadata(createParser(thumb_image_path))
-                if metadata.has("duration"):
-                    duration = metadata.get('duration').seconds
-                if metadata.has("width"):
-                    width = metadata.get("width")
-                if metadata.has("height"):
-                    height = metadata.get("height")
+            logger.info(thumb_image_path)
+            # 'thumb_image_path' will be available now
+            metadata = extractMetadata(createParser(thumb_image_path))
+            if metadata.has("width"):
+                width = metadata.get("width")
+            if metadata.has("height"):
+                height = metadata.get("height")
                 # resize image
                 # ref: https://t.me/PyrogramChat/44663
                 # https://stackoverflow.com/a/21669827/4723940
