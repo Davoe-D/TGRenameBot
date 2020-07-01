@@ -101,7 +101,7 @@ async def rename_doc(bot, update):
                 thumb_image_path = await take_screen_shot(
                     new_file_name,
                     os.path.dirname(new_file_name),
-                    (duration / 2)
+                    (duration / 1)
                 )
             logger.info(thumb_image_path)
             # 'thumb_image_path' will be available now
